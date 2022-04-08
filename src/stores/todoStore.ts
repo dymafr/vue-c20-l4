@@ -14,4 +14,12 @@ export const useTodos = defineStore('todos', {
       return state.todos;
     },
   },
+  actions: {
+    addTodo(content: string) {
+      this.todos.push({
+        content,
+        done: false,
+      });
+    },
+  },
 });

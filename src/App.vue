@@ -4,10 +4,16 @@
       <h1 class="mb-20">Todo List</h1>
       <div class="d-flex align-items-center">
         <input v-model="input" type="text" class="flex-fill mr-20" />
-        <button class="btn btn-primary mr-20">Ajouter</button>
+        <button class="btn btn-primary mr-20" @click="addTodo">Ajouter</button>
       </div>
       <ul>
-        <li class="d-flex align-items-center"></li>
+        <li
+          v-for="todo in todos"
+          class="d-flex align-items-center"
+          :key="todo.content"
+        >
+          {{ todo.content }}
+        </li>
       </ul>
     </div>
   </div>
@@ -20,7 +26,12 @@ import { useTodos } from './stores/todoStore';
 const input = ref<string>('');
 
 const todoStore = useTodos();
-console.log(todoStore.todoList);
+const todos = todoStore.todoList;
+
+function addTodo() {
+  todoStore.addTodo(input.value);
+  input.value = '';
+}
 </script>
 
 <style lang="scss">
